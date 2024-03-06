@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    driver-class: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/security?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    username: root
+    password: wndnjs13579!
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+  mustache:
+    servlet:
+      expose-request-attributes: true
+
+server:
+  servlet:
+    session:
+      timeout: 90m
