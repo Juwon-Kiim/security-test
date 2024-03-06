@@ -1,20 +1,19 @@
 package com.example.TestSecurity.service;
 
-import com.example.TestSecurity.controller.JoinController;
 import com.example.TestSecurity.dto.JoinDTO;
 import com.example.TestSecurity.entity.UserEntity;
-import com.example.TestSecurity.repository.JoinRepository;
+import com.example.TestSecurity.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class JoinService {
-    private final JoinRepository joinRepository;
+    private final UserRepository userRepository;
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public JoinService(JoinRepository joinRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.joinRepository = joinRepository;
+    public JoinService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
@@ -24,6 +23,6 @@ public class JoinService {
         userEntity.setPassword(bCryptPasswordEncoder.encode(joinDTO.getPassword()));
         userEntity.setRole("ROLE_USER");
 
-        joinRepository.save(userEntity);
+        userRepository.save(userEntity);
     }
 }
