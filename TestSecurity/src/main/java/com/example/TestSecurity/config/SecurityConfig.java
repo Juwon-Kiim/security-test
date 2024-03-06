@@ -24,6 +24,10 @@ public class SecurityConfig {
                 .formLogin(login -> login
                         .loginPage("/login")
                         .loginProcessingUrl("/loginProc"))
+                .sessionManagement(auth -> auth
+                        .sessionFixation().changeSessionId()
+                        .maximumSessions(1)
+                        .maxSessionsPreventsLogin(true))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/login", "/join", "/joinProc").permitAll()
                         .requestMatchers("/admin").hasRole("ADMIN")
