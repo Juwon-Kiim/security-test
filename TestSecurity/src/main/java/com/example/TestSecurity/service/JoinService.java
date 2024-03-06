@@ -19,16 +19,11 @@ public class JoinService {
     }
 
     public void joinProcess(JoinDTO joinDTO){
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUsername(joinDTO.getUsername());
+        userEntity.setPassword(bCryptPasswordEncoder.encode(joinDTO.getPassword()));
+        userEntity.setRole("ROLE_USER");
 
-        UserEntity findUsername = joinRepository.findByUsername(joinDTO.getUsername());
-
-        if(findUsername==null) {
-            UserEntity userEntity = new UserEntity();
-            userEntity.setUsername(joinDTO.getUsername());
-            userEntity.setPassword(bCryptPasswordEncoder.encode(joinDTO.getPassword()));
-            userEntity.setRole("ROLE_USER");
-
-            joinRepository.save(userEntity);
-        }
+        joinRepository.save(userEntity);
     }
 }
