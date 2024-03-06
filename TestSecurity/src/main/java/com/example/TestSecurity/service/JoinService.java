@@ -18,6 +18,12 @@ public class JoinService {
     }
 
     public void joinProcess(JoinDTO joinDTO){
+        boolean isUser = userRepository.existsByUsername(joinDTO.getUsername());
+        if(isUser) {
+            System.out.println("해당 회원 이미 존재함");
+            return;
+        }
+
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername(joinDTO.getUsername());
         userEntity.setPassword(bCryptPasswordEncoder.encode(joinDTO.getPassword()));
